@@ -3,7 +3,6 @@
 #cython: wraparound=False
 #cython: initializedcheck=False
 #cython: profile=False
-#cython: language_level=3
 
 import math
 import numpy as np
