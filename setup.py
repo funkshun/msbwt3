@@ -12,6 +12,7 @@ from MUS import util
 try:
     from Cython.Distutils import build_ext as _build_ext
 except ImportError:
+    print("Failed to import Cython...")
     from setuptools.command.build_ext import build_ext as _build_ext
     useCython = False
 else:
@@ -20,9 +21,10 @@ else:
 cmdClass = {}
 extModules = []
 
+
 if useCython:
-    extModules += [Extension('MUSCython.AlignmentUtil', ['MUSCython/AlignmentUtil.pyx'], include_dirs=['.']),
-                   Extension('MUSCython.BasicBWT', ['MUSCython/BasicBWT.pyx'], include_dirs=['.']),
+    extModules += [Extension('MUSCython.BasicBWT', ['MUSCython/BasicBWT.pyx'], include_dirs=['.']),
+                   Extension('MUSCython.AlignmentUtil', ['MUSCython/AlignmentUtil.pyx'], include_dirs=['.']),
                    Extension('MUSCython.ByteBWTCython', ['MUSCython/ByteBWTCython.pyx'], include_dirs=['.']),
                    Extension('MUSCython.CompressToRLE', ['MUSCython/CompressToRLE.pyx'], include_dirs=['.']),
                    Extension('MUSCython.GenericMerge', ['MUSCython/GenericMerge.pyx'], include_dirs=['.']),
@@ -34,6 +36,9 @@ if useCython:
                    Extension('MUSCython.MultiStringBWTCython', ['MUSCython/MultiStringBWTCython.pyx'], include_dirs=['.']),
                    Extension('MUSCython.RLE_BWTCython', ['MUSCython/RLE_BWTCython.pyx'], include_dirs=['.'])]
     cmdClass.update({'build_ext':_build_ext})
+
+    for m in extModules:
+        m.cython_directives = {'language_level': "3"}
     
     #this is also from the stackoverflow link above, used to auto-compile when you do the sdist command
     class sdist(_sdist):
@@ -41,18 +46,8 @@ if useCython:
             # Make sure the compiled Cython files in the distribution are up-to-date
             from Cython.Build import cythonize
             import numpy as np
-            cythonize('MUSCython/AlignmentUtil.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/BasicBWT.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/ByteBWTCython.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/CompressToRLE.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/GenericMerge.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/LCPGen.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/LZW_BWTCython.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/MSBWTCompGenCython.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/MSBWTGenCython.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/MultimergeCython.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/MultiStringBWTCython.pyx', include_path=[np.get_include()])
-            cythonize('MUSCython/RLE_BWTCython.pyx', include_path=[np.get_include()])
+            for e in extModules:
+                cythonize(e, compiler_directives={'language_level': "3"})
             _sdist.run(self)
     cmdClass['sdist'] = sdist
     
@@ -95,4 +90,5 @@ setup(name='msbwt',
       scripts=['bin/msbwt'],
       zip_safe=False,
       ext_modules=extModules,
-      cmdclass=cmdClass)
+      cmdclass=cmdClass,
+      )

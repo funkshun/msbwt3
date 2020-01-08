@@ -2,6 +2,7 @@
 #cython: boundscheck=False
 #cython: wraparound=False
 #cython: initializedcheck=False
+#cython: language_level=3
 
 '''
 Created on Mar 19, 2014

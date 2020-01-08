@@ -1,3 +1,5 @@
 *.c
 *.pyc
 *.pyo
+env/
+build/
