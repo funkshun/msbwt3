@@ -1,0 +1,10 @@
+include MANIFEST.in
+include LICENSE
+include README
+include AUTHORS
+include setup.py
+include setup.cfg
+recursive-include MUS *.py
+recursive-include MUSCython *.py
+recursive-include MUSCython *.pyx
+recursive-include MUSCython *.c
