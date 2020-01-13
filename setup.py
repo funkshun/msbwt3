@@ -38,7 +38,7 @@ if useCython:
     cmdClass.update({'build_ext':_build_ext})
 
     for m in extModules:
-        m.cython_directives = {'language_level': "3"}
+        m.cython_directives = {'language_level': "2"}
     
     #this is also from the stackoverflow link above, used to auto-compile when you do the sdist command
     class sdist(_sdist):
@@ -46,8 +46,7 @@ if useCython:
             # Make sure the compiled Cython files in the distribution are up-to-date
             from Cython.Build import cythonize
             import numpy as np
-            for e in extModules:
-                cythonize(e, compiler_directives={'language_level': "3"})
+            cythonize(extModules)
             _sdist.run(self)
     cmdClass['sdist'] = sdist
     
@@ -76,7 +75,7 @@ class build_ext(_build_ext):
         self.include_dirs.append(np.get_include())
 cmdClass['build_ext']=build_ext
 
-setup(name='msbwt',
+setup(name='msbwt3',
       version=util.VERSION,
       description='Allows for merging and querying of multi-string BWTs for genomic strings',
       url='http://code.google.com/p/msbwt',
