@@ -33,18 +33,21 @@ Proceedings of the 5th ACM Conference on Bioinformatics, Computational Biology, 
 System Requirements
 ===================
 
-Msbwt and its modules have been tested under Python 2.7.  The package is distributed with both Cython and the 
-corresponding C files.  We recommend using installing Cython prior to installing this package.
+msbwt3 and its modules have been tested under Python 3.8.  The package is distributed without the C files,
+so compilation with Cython is required.
 
 Two Python modules are required to run the code.
 
-[pysam] - Tested with pysam 0.7.4
+[pysam] - Tested with pysam 0.15.3
 
 As a wrapper of Samtools, the pysam module facilitates the manipulation of SAM/BAM files in Python. Its latest 
 package can be downloaded from:
 
 	http://code.google.com/p/pysam/
 
+*NOTE:* As of ```13 January, 2020,``` the PyPi version of pysam does not build for Python 3.8.
+It is recommended to clone the github repository and execute ```pip install .```
+in the resulting directory.
 
 [argparse] - Tested with argparse 1.2.1
 
@@ -53,7 +56,7 @@ Standard Library since Python 2.7.  Its latest package can be downloaded from:
 
 	http://code.google.com/p/argparse/
 
-[numpy] - Tested with numpy 1.10.1
+[numpy] - Tested with numpy 1.18.1
 
 The numpy module provide various fast numerical functions for Python.  Its latest package can be downloaded from:
 
@@ -62,45 +65,20 @@ The numpy module provide various fast numerical functions for Python.  Its lates
 Installation
 ============
 
-It is recommended to use easy-install (http://packages.python.org/distribute/easy_install.html) for the 
-installation.
-
-	easy_install msbwt
-
-Alternatively, users can download the tarball of source from
-
-	https://github.com/holtjma/msbwt
-
-and then type:
-
-	easy_install msbwt-<version>.tar.gz
+It is recommended to use pip to install this package.
+This can be done by cloning the repository, and then executing the pip command within.
+```shell
+git clone https://github.com/funkshun/msbwt3 && cd msbwt3
+pip install .
+```
+*NOTE*: This process will attempt to install the PyPi version of pysam.
+If this version is still broken, follow the above instructions to install it prior to installing msbwt3.
 
 By default, the package will be installed under the directory of Python dist-packages, and the executable of 
 msbwt can be found under '/usr/local/bin/'.
 
-If you don't have permission to install it in the system-owned directory, you can install it in locally following 
-the next steps:
-
-(1) Create a local package directory for python:
-
-	mkdir -p <local_dir>
-
-(2) Add the absolute path of <local_dir> to the environment variable PYTHONPATH:
-
-	export PYTHONPATH=$PYTHONPATH:<local_dir>
-
-(3) Use easy_install to install the package in that directory:
-
-	easy_install -d <local_dir> msbwt-<version>.tar.gz
-
-For example, if you want to install the package under the home directory in
-a Linux system, you can type:
-
-	mkdir -p /home/$USER/.local/lib/python/dist-packages/
-	export PYTHONPATH=$PYTHONPATH:/home/$USER/.local/lib/python/dist-packages/
-	easy_install -d /home/$USER/.local/lib/python/dist-packages/ msbwt-<version>.tar.gz
-
-After installation, msbwt will be located in '/home/$USER/.local/lib/python/dist-packages/'.
+If you don't have permission to install it in the system-owned directory, you can install it in userspace by appending
+```--user``` to any pip install commands:
 
 
 Detailed Description
