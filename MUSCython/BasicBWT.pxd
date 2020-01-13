@@ -12,7 +12,7 @@ cdef class BasicBWT(object):
     cdef unsigned char [:] charToNum_view
     cdef unsigned long vcLen
     
-    cdef char * dirName
+    cdef str dirName
     cdef np.ndarray bwt
     cdef np.uint8_t [:] bwt_view
     

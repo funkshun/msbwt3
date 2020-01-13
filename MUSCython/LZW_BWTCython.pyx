@@ -50,7 +50,7 @@ cdef class LZW_BWT(BasicBWT.BasicBWT):
     def getCompSize(LZW_BWT self):
         return self.bwt.shape[0]
     
-    def loadMsbwt(LZW_BWT self, char * dirName, bint useMemmap=True, logger=None):
+    def loadMsbwt(LZW_BWT self, str dirName, bint useMemmap=True, logger=None):
         '''
         This functions loads a BWT file and constructs total counts, indexes start positions, and constructs an FM index
         on disk if it doesn't already exist
