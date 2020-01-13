@@ -48,7 +48,7 @@ package can be downloaded from:
 *NOTE:* As of ```13 January, 2020,``` the PyPi version of pysam does not build for Python 3.8.
 It is recommended to clone the github repository
 
-        https://github.com/pysam-developers/pysam
+    https://github.com/pysam-developers/pysam
 	
 and execute
 
