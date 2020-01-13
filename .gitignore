@@ -3,3 +3,6 @@
 *.pyo
 env/
 build/
+dist/
+msbwt.egg-info/
+
