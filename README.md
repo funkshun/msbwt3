@@ -46,7 +46,14 @@ package can be downloaded from:
 	http://code.google.com/p/pysam/
 
 *NOTE:* As of ```13 January, 2020,``` the PyPi version of pysam does not build for Python 3.8.
-It is recommended to clone the github repository and execute ```pip install .```
+It is recommended to clone the github repository
+
+        https://github.com/pysam-developers/pysam
+	
+and execute
+
+```pip install .```
+
 in the resulting directory.
 
 [argparse] - Tested with argparse 1.2.1
@@ -77,7 +84,7 @@ If this version is still broken, follow the above instructions to install it pri
 By default, the package will be installed under the directory of Python dist-packages, and the executable of 
 msbwt can be found under '/usr/local/bin/'.
 
-If you don't have permission to install it in the system-owned directory, you can install it in userspace by appending
+If you don't have permission to install it in the system-owned directory, you can install it locally by appending
 ```--user``` to any pip install commands:
 
 
