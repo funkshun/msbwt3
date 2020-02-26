@@ -198,13 +198,13 @@ def mainRun():
         
         #always print how many are found, users can parse it out if they want
         r = msbwt.findIndicesOfStr(args.kmer)
-        print r[1]-r[0]
+        print(r[1]-r[0])
         
         #dump the seqs if request
         if args.dumpSeqs:
             for x in xrange(r[0], r[1]):
                 dInd = msbwt.getSequenceDollarID(x)
-                print msbwt.recoverString(dInd)[1:]+','+str(dInd)
+                print (msbwt.recoverString(dInd)[1:]+','+str(dInd))
     
     elif args.subparserID == 'massquery':
         logger.info('Input:\t'+str(args.inputBwtDir))
@@ -243,7 +243,7 @@ def mainRun():
         logger.info('Finished conversion.')
         
     else:
-        print args.subparserID+" is currently not implemented, please wait for a future release."
+        print (args.subparserID+" is currently not implemented, please wait for a future release.")
 
 if __name__ == '__main__':
     mainRun()

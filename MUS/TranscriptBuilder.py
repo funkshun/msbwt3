@@ -54,7 +54,7 @@ class PathNode(object):
         terminate = False
         while not terminate:
             if len(kmer) != self.pathK:
-                print 'ERROR: DIFFERENT SIZED K-MER '+str(len(kmer))
+                print('ERROR: DIFFERENT SIZED K-MER '+str(len(kmer)))
                 raise Exception('ERROR')
         
             #First, perform all the counts of paths going both forwards and backwards
@@ -190,7 +190,7 @@ class PathNode(object):
         #print
     
     def followNewHistory(self, newHistMer):
-        print 'UNHANDLED '
+        print ('UNHANDLED ')
 
 class PathEdge(object):
     def __init__(self, edgeID, fromNodeID, toNodeID, edgeWeight, label, style='solid'):

@@ -979,7 +979,7 @@ def preprocessBams(bamFNs, seqFNPrefix, offsetFN, abtFN, areUniform, logger):
             reads = [None, None]
             for a in aligns:
                 if len(a.seq) != constantSize:
-                    print 'DIFF SIZE='+str(len(a.seq))
+                    print ('DIFF SIZE='+str(len(a.seq)))
                 
                 if a.flag & REVERSE_COMPLEMENTED_FLAG == 0:
                     #not reverse complemented
@@ -1241,7 +1241,7 @@ def interactiveTranscriptConstruction(bwtDir, seedKmer, endSeeds, threshold, num
     while not terminate and len(discoveredBlocks) < numNodes:
         
         if len(kmer) != kmerLen:
-            print 'ERROR: DIFFERENT SIZED K-MER '+str(len(kmer))
+            print ('ERROR: DIFFERENT SIZED K-MER '+str(len(kmer)))
             raise Exception('ERROR')
         
         #First, perform all the counts of paths going both forwards and backwards
@@ -1289,7 +1289,7 @@ def interactiveTranscriptConstruction(bwtDir, seedKmer, endSeeds, threshold, num
             discoveredBlocks.append((parentID, ret, pileups, 'MERGE_'+str(blockID+1)))
             discoveredEdges.append((blockID, blockID+1, revCounts))
             
-            print 'INCOMING MERGE FOUND: '+str(discoveredBlocks[blockID])
+            print ('INCOMING MERGE FOUND: '+str(discoveredBlocks[blockID]))
             parentID = blockID
             blockID += 1
             
@@ -1297,19 +1297,19 @@ def interactiveTranscriptConstruction(bwtDir, seedKmer, endSeeds, threshold, num
             pileups = []
             
         if total == 0:
-            print 'No strings found.'
+            print ('No strings found.')
             discoveredBlocks.append((parentID, ret, pileups, 'TERMINAL'))
             
             pileups = []
             
-            print pathTups
-            print discoveredBlocks
+            print (pathTups)
+            print (discoveredBlocks)
             
             if len(pathTups) == 0:
                 terminate = True
             else:
                 nextPathTup = pathTups.pop(0)
-                print 'Handling1: '+str(nextPathTup)
+                print ('Handling1: '+str(nextPathTup))
                 parentID = nextPathTup[1]
                 direction = nextPathTup[2]
                 kmer = nextPathTup[3]
@@ -1348,14 +1348,14 @@ def interactiveTranscriptConstruction(bwtDir, seedKmer, endSeeds, threshold, num
                     pathTup = (counts[c], blockID, direction, pathSeed)
                     pathTups.append(pathTup)
             
-            print pathTups
-            print discoveredBlocks
+            print (pathTups)
+            print (discoveredBlocks)
             
             if len(pathTups) == 0:
                 terminate = True
             else:
                 nextPathTup = pathTups.pop(0)
-                print 'Handling2: '+str(nextPathTup)
+                print ('Handling2: '+str(nextPathTup))
                 parentID = nextPathTup[1]
                 direction = nextPathTup[2]
                 kmer = nextPathTup[3]
@@ -1377,21 +1377,21 @@ def interactiveTranscriptConstruction(bwtDir, seedKmer, endSeeds, threshold, num
             pos += 1
             
             movingAverage = .9*movingAverage+.1*maxV
-            print str(pos)+':\t'+kmer+'\t'+str(perc)+'\t'+str(maxV)+'/'+str(total)+'\t'+str(total-maxV)+'\t'+str(movingAverage)
+            print (str(pos)+':\t'+kmer+'\t'+str(perc)+'\t'+str(maxV)+'/'+str(total)+'\t'+str(total-maxV)+'\t'+str(movingAverage))
             
         while foundKmers.has_key(kmer) and not terminate:
             #TODO: reverse ret if direction is reversed
             discoveredBlocks.append((parentID, ret, pileups, 'MERGE_'+str(foundKmers[kmer])))
             discoveredEdges.append((blockID, foundKmers[kmer], ''))
             
-            print pathTups
-            print discoveredBlocks
+            print (pathTups)
+            print (discoveredBlocks)
             
             if len(pathTups) == 0:
                 terminate = True
             else:
                 nextPathTup = pathTups.pop(0)
-                print 'Handling3: '+str(nextPathTup)
+                print ('Handling3: '+str(nextPathTup))
                 #pileups.append(nextPathTup[0])
                 parentID = nextPathTup[1]
                 direction = nextPathTup[2]
