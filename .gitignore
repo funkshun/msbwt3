@@ -1,8 +1,9 @@
 *.c
+*.so
 *.pyc
 *.pyo
 env/
 build/
 dist/
-msbwt.egg-info/
+*.egg-info/
 
